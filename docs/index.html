@@ -1,42 +1,78 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My GitHub Pages Site</title>
-  <meta name="description" content="A minimal, fast personal site hosted on GitHub Pages." />
+  <title>Trang Cá Nhân — GitHub Pages</title>
+  <meta name="description" content="Trang cá nhân tối giản, tải nhanh, triển khai trên GitHub Pages." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0b1220" />
+  <!-- Open Graph cơ bản -->
+  <meta property="og:title" content="Trang Cá Nhân — GitHub Pages" />
+  <meta property="og:description" content="Tối giản, tinh tế, tải nhanh." />
+  <meta property="og:type" content="website" />
+
   <style>
-    /* ====== Base styles (no external libraries) ====== */
+    /* ====== Cấu hình nền tảng (không dùng thư viện ngoài) ====== */
     :root {
       --bg: #0b1220;
+      --bg-soft: #12182a;
       --card: #121a2b;
       --text: #e6edf6;
       --muted: #a9b4c5;
-      --brand: #6ea8fe;
+      --border: #243154;
+      --brand: #86a8ff;
       --brand-2: #9bffd6;
       --ring: #3a78ff55;
+      --shadow: 0 10px 30px #00000033;
     }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f9fc;
+        --bg-soft: #ffffff;
+        --card: #ffffff;
+        --text: #0b1324;
+        --muted: #4b5568;
+        --border: #e5e9f2;
+        --ring: #3a78ff55;
+        --shadow: 0 6px 20px #00000012;
+      }
+    }
+
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
-      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% -10%, #1a2540 0%, var(--bg) 50%) fixed;
-      color: var(--text); line-height: 1.6;
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1a2540 0%, var(--bg) 55%) fixed,
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     a { color: var(--brand); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
     .container { max-width: 960px; margin: 0 auto; padding: 24px; }
+
     header {
-      position: sticky; top: 0; backdrop-filter: blur(8px);
-      background: linear-gradient(to bottom, #0b1220cc, #0b122000);
-      border-bottom: 1px solid #1f2b43; z-index: 10;
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, color-mix(in oklab, var(--bg), transparent 20%), transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--border), transparent 40%);
     }
     .nav {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
-    .logo { font-weight: 700; letter-spacing: .3px; }
-    .nav a { padding: 8px 10px; border-radius: 10px; }
-    .nav a:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .logo { font-weight: 700; letter-spacing: .2px; }
+    nav a {
+      padding: 8px 10px; border-radius: 10px;
+    }
+    nav a[aria-current="page"] { background: color-mix(in oklab, var(--brand), transparent 85%); }
+    nav a:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       background: linear-gradient(90deg, var(--brand), var(--brand-2));
@@ -44,126 +80,139 @@
       box-shadow: 0 6px 24px #6ea8fe26; cursor: pointer;
     }
     .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
     main { padding-top: 24px; }
     .hero {
       display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; padding: 48px 0;
     }
     .card {
-      background: linear-gradient(180deg, #131c31, var(--card));
-      border: 1px solid #243154; border-radius: 16px; padding: 20px;
-      box-shadow: 0 10px 30px #00000033, inset 0 1px 0 #ffffff12;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--card), #000 3%), var(--card));
+      border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow);
     }
-    .kicker { letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-size: 12px; }
+    .kicker { letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-size: 12px; }
     h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; margin: 10px 0 6px; }
     .sub { color: var(--muted); margin: 0 0 18px; }
     .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     footer { color: var(--muted); font-size: 14px; padding: 32px 0 60px; }
-    /* Responsive */
+
+    /* Biểu mẫu */
+    .input {
+      width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg-soft); color: var(--text);
+    }
+    label { display: block; font-weight: 600; margin: 8px 0 6px; }
+
+    /* Đáp ứng */
     @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
-    /* Skip link for accessibility */
+
+    /* Skip link (A11y) */
     .skip { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
     .skip:focus { position: static; width: auto; height: auto; padding: 8px 12px; border-radius: 8px; background: #fff3; }
+
+    /* Giảm chuyển động cho người dùng ưa tĩnh */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <a class="skip" href="#content">Skip to content</a>
+  <a class="skip" href="#noidung">Bỏ qua để vào nội dung chính</a>
 
   <header>
     <div class="container nav">
       <div class="logo">MySite</div>
-      <nav aria-label="Primary">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="btn">Contact</a>
+      <nav aria-label="Điều hướng chính">
+        <a href="#duan" aria-current="page">Dự án</a>
+        <a href="#gioithieu">Giới thiệu</a>
+        <a href="#lienhe" class="btn">Liên hệ</a>
       </nav>
     </div>
   </header>
 
-  <main id="content" class="container">
+  <main id="noidung" class="container">
     <section class="hero">
       <div>
-        <p class="kicker">Hello, GitHub Pages 👋</p>
-        <h1>Fast, minimal website — one HTML file.</h1>
-        <p class="sub">Edit this file, push to GitHub, and your site is live. No frameworks required.</p>
-        <button class="btn" id="cta">Say hi in console</button>
+        <p class="kicker">Chào GitHub Pages 👋</p>
+        <h1>Website nhanh, tối giản — chỉ một tệp HTML.</h1>
+        <p class="sub">Sửa tệp này, đẩy lên GitHub, và trang sẽ hoạt động. Không cần framework.</p>
+        <button class="btn" id="cta">Chào trong console</button>
       </div>
-      <div class="card" role="img" aria-label="Abstract gradient card">
-        <h2 style="margin:0 0 8px">Why this template?</h2>
+
+      <div class="card" role="img" aria-label="Thẻ thông tin tổng quan">
+        <h2 style="margin:0 0 8px">Vì sao chọn mẫu này?</h2>
         <ul style="margin:0; padding-left:18px">
-          <li>No external libraries → loads fast.</li>
-          <li>Responsive grid layout.</li>
-          <li>Accessible (skip link, focus styles, landmarks).</li>
+          <li>Không phụ thuộc thư viện ngoài → tải cực nhanh.</li>
+          <li>Bố cục lưới đáp ứng.</li>
+          <li>Thân thiện truy cập (skip link, focus rõ, vùng ngữ nghĩa).</li>
         </ul>
       </div>
     </section>
 
-    <section id="projects" class="grid" aria-labelledby="projects-title">
-      <h2 id="projects-title" style="grid-column:1 / -1; margin:8px 0;">Projects</h2>
+    <section id="duan" class="grid" aria-labelledby="tieu-de-du-an">
+      <h2 id="tieu-de-du-an" style="grid-column:1 / -1; margin:8px 0;">Dự án</h2>
 
       <article class="card">
-        <h3 style="margin-top:0;">Project A</h3>
-        <p>A short description of your project. <a href="#">View</a></p>
+        <h3 style="margin-top:0;">Dự án A</h3>
+        <p>Mô tả ngắn về dự án. <a href="#">Xem</a></p>
       </article>
 
       <article class="card">
-        <h3 style="margin-top:0;">Project B</h3>
-        <p>Another highlight project. <a href="#">View</a></p>
+        <h3 style="margin-top:0;">Dự án B</h3>
+        <p>Một điểm nhấn khác. <a href="#">Xem</a></p>
       </article>
 
       <article class="card">
-        <h3 style="margin-top:0;">Project C</h3>
-        <p>Something you’re proud of. <a href="#">View</a></p>
+        <h3 style="margin-top:0;">Dự án C</h3>
+        <p>Điều bạn tự hào. <a href="#">Xem</a></p>
       </article>
     </section>
 
-    <section id="about" class="card" style="margin-top:24px">
-      <h2 style="margin-top:0;">About</h2>
-      <p>Write a short bio here. Mention your skills, interests, and what you’re looking for.</p>
+    <section id="gioithieu" class="card" style="margin-top:24px">
+      <h2 style="margin-top:0;">Giới thiệu</h2>
+      <p>Viết đôi dòng về bạn: kỹ năng, mối quan tâm, và mục tiêu bạn hướng tới.</p>
     </section>
 
-    <section id="contact" class="card" style="margin-top:24px">
-      <h2 style="margin-top:0;">Contact</h2>
-      <form id="contact-form">
-        <label>
-          Name
-          <input required name="name" style="width:100%; padding:10px; border-radius:10px; border:1px solid #2b3a60; background:#0f1627; color:var(--text)" />
-        </label>
-        <label style="display:block; margin-top:10px;">
-          Message
-          <textarea required name="msg" rows="4" style="width:100%; padding:10px; border-radius:10px; border:1px solid #2b3a60; background:#0f1627; color:var(--text)"></textarea>
-        </label>
-        <button class="btn" type="submit" style="margin-top:10px">Send (Demo)</button>
-        <p id="status" style="color:var(--muted); margin-top:10px;"></p>
+    <section id="lienhe" class="card" style="margin-top:24px">
+      <h2 style="margin-top:0;">Liên hệ</h2>
+      <form id="form-lien-he" aria-describedby="trangthai">
+        <label for="name">Họ và tên</label>
+        <input class="input" id="name" name="name" required />
+
+        <label for="msg">Lời nhắn</label>
+        <textarea class="input" id="msg" name="msg" rows="4" required></textarea>
+
+        <button class="btn" type="submit" style="margin-top:10px">Gửi (Demo)</button>
+        <p id="trangthai" style="color:var(--muted); margin-top:10px;" aria-live="polite"></p>
       </form>
     </section>
   </main>
 
   <footer class="container">
-    <p>© <span id="year"></span> Your Name — Built for GitHub Pages.</p>
+    <p>© <span id="year"></span> Tên của bạn — Xây dựng cho GitHub Pages.</p>
   </footer>
 
   <script>
-    // Minimal JS (no libraries)
+    // JS tối thiểu (không thư viện)
     document.getElementById('year').textContent = new Date().getFullYear();
 
     document.getElementById('cta').addEventListener('click', () => {
-      console.log('Hello from GitHub Pages! 🎉');
-      alert('Check the console! (F12 → Console)');
+      console.log('Xin chào từ GitHub Pages! 🎉');
+      alert('Mở Developer Tools → Console để xem lời chào!');
     });
 
-    const form = document.getElementById('contact-form');
-    const statusEl = document.getElementById('status');
+    const form = document.getElementById('form-lien-he');
+    const statusEl = document.getElementById('trangthai');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
-      // Demo only — no backend on GitHub Pages.
-      statusEl.textContent = `Thanks, ${data.name}! (Form demo only, no server here.)`;
+      // Demo: GitHub Pages không có backend xử lý form.
+      statusEl.textContent = `Cảm ơn ${data.name}! (Demo, chưa có máy chủ xử lý.)`;
       form.reset();
     });
   </script>
 
-  <!-- Optional: If you prefer utility CSS, you can add Tailwind via CDN.
-       Commented out to keep this file dependency-free.
+  <!-- Tuỳ chọn: Nếu muốn dùng utility CSS, có thể bật Tailwind CDN.
+       Để giữ hiệu năng và sự tối giản, mặc định KHÔNG dùng.
   <script src="https://cdn.tailwindcss.com"></script>
   -->
 </body>
