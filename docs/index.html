@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My GitHub Pages Site</title>
+  <meta name="description" content="A minimal, fast personal site hosted on GitHub Pages." />
+  <style>
+    /* ====== Base styles (no external libraries) ====== */
+    :root {
+      --bg: #0b1220;
+      --card: #121a2b;
+      --text: #e6edf6;
+      --muted: #a9b4c5;
+      --brand: #6ea8fe;
+      --brand-2: #9bffd6;
+      --ring: #3a78ff55;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1a2540 0%, var(--bg) 50%) fixed;
+      color: var(--text); line-height: 1.6;
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 960px; margin: 0 auto; padding: 24px; }
+    header {
+      position: sticky; top: 0; backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, #0b1220cc, #0b122000);
+      border-bottom: 1px solid #1f2b43; z-index: 10;
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .logo { font-weight: 700; letter-spacing: .3px; }
+    .nav a { padding: 8px 10px; border-radius: 10px; }
+    .nav a:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      color: #0b1220; padding: 10px 14px; border: 0; border-radius: 12px; font-weight: 600;
+      box-shadow: 0 6px 24px #6ea8fe26; cursor: pointer;
+    }
+    .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    main { padding-top: 24px; }
+    .hero {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; padding: 48px 0;
+    }
+    .card {
+      background: linear-gradient(180deg, #131c31, var(--card));
+      border: 1px solid #243154; border-radius: 16px; padding: 20px;
+      box-shadow: 0 10px 30px #00000033, inset 0 1px 0 #ffffff12;
+    }
+    .kicker { letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-size: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; margin: 10px 0 6px; }
+    .sub { color: var(--muted); margin: 0 0 18px; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    footer { color: var(--muted); font-size: 14px; padding: 32px 0 60px; }
+    /* Responsive */
+    @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
+    /* Skip link for accessibility */
+    .skip { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip:focus { position: static; width: auto; height: auto; padding: 8px 12px; border-radius: 8px; background: #fff3; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">MySite</div>
+      <nav aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="btn">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container">
+    <section class="hero">
+      <div>
+        <p class="kicker">Hello, GitHub Pages 👋</p>
+        <h1>Fast, minimal website — one HTML file.</h1>
+        <p class="sub">Edit this file, push to GitHub, and your site is live. No frameworks required.</p>
+        <button class="btn" id="cta">Say hi in console</button>
+      </div>
+      <div class="card" role="img" aria-label="Abstract gradient card">
+        <h2 style="margin:0 0 8px">Why this template?</h2>
+        <ul style="margin:0; padding-left:18px">
+          <li>No external libraries → loads fast.</li>
+          <li>Responsive grid layout.</li>
+          <li>Accessible (skip link, focus styles, landmarks).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects" class="grid" aria-labelledby="projects-title">
+      <h2 id="projects-title" style="grid-column:1 / -1; margin:8px 0;">Projects</h2>
+
+      <article class="card">
+        <h3 style="margin-top:0;">Project A</h3>
+        <p>A short description of your project. <a href="#">View</a></p>
+      </article>
+
+      <article class="card">
+        <h3 style="margin-top:0;">Project B</h3>
+        <p>Another highlight project. <a href="#">View</a></p>
+      </article>
+
+      <article class="card">
+        <h3 style="margin-top:0;">Project C</h3>
+        <p>Something you’re proud of. <a href="#">View</a></p>
+      </article>
+    </section>
+
+    <section id="about" class="card" style="margin-top:24px">
+      <h2 style="margin-top:0;">About</h2>
+      <p>Write a short bio here. Mention your skills, interests, and what you’re looking for.</p>
+    </section>
+
+    <section id="contact" class="card" style="margin-top:24px">
+      <h2 style="margin-top:0;">Contact</h2>
+      <form id="contact-form">
+        <label>
+          Name
+          <input required name="name" style="width:100%; padding:10px; border-radius:10px; border:1px solid #2b3a60; background:#0f1627; color:var(--text)" />
+        </label>
+        <label style="display:block; margin-top:10px;">
+          Message
+          <textarea required name="msg" rows="4" style="width:100%; padding:10px; border-radius:10px; border:1px solid #2b3a60; background:#0f1627; color:var(--text)"></textarea>
+        </label>
+        <button class="btn" type="submit" style="margin-top:10px">Send (Demo)</button>
+        <p id="status" style="color:var(--muted); margin-top:10px;"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>© <span id="year"></span> Your Name — Built for GitHub Pages.</p>
+  </footer>
+
+  <script>
+    // Minimal JS (no libraries)
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('cta').addEventListener('click', () => {
+      console.log('Hello from GitHub Pages! 🎉');
+      alert('Check the console! (F12 → Console)');
+    });
+
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('status');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Demo only — no backend on GitHub Pages.
+      statusEl.textContent = `Thanks, ${data.name}! (Form demo only, no server here.)`;
+      form.reset();
+    });
+  </script>
+
+  <!-- Optional: If you prefer utility CSS, you can add Tailwind via CDN.
+       Commented out to keep this file dependency-free.
+  <script src="https://cdn.tailwindcss.com"></script>
+  -->
+</body>
+</html>
